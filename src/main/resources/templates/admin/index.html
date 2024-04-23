@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="https://www.thymeleaf.org">
+<th:block th:insert="~{head :: head}"></th:block>
+
+<body>
+
+<th:block th:insert="~{header :: header}"></th:block>
+
+<main class="container-fluid">
+    <h2 class="text-center">Tableau de board</h2>
+
+    <div class="d-flex">
+        <a th:href="@{categorie/search}">
+        <div class="card m-1 p-4 text-center">
+            Nombre de catégorie <p class="fw-bolder">[[${categorieCount}]]</p>
+        </div>
+        </a>
+        <a th:href="@{user/list}">
+        <div class="card m-1 p-4 text-center">
+            Nombre de user <p class="fw-bolder">[[${userUser}]]</p>
+        </div>
+        </a>
+
+        <a th:href="@{/}">
+        <div class="card m-1 p-4 text-center">
+            Nombre de admin <p class="fw-bolder">[[${userAdmin}]]</p>
+        </div>
+
+        </a>
+        <a th:href="@{/}">
+        <div class="card m-1 p-4 text-center">
+            nombre users <p class="fw-bolder">[[${userCount}]]</p>
+        </div>
+        </a>
+        <a th:href="@{agence/list}">
+        <div class="card m-1 p-4 text-center">
+           Agences <p class="fw-bolder">[[${agenceCount}]]</p>
+        </div>
+        </a>
+
+        <a th:href="@{/agence/find/1}">
+            <div class="card m-1 p-4 text-center">
+               CARDIOR Agences <p class="fw-bolder">[[${agence1}]] % reserver de cette agence</p>
+            </div>
+        </a>
+
+        <a th:href="@{/agence/find/11}">
+            <div class="card m-1 p-4 text-center">
+                IESIG Agences <p class="fw-bolder">[[${agence11}]] % reserver de cette agence</p>
+            </div>
+        </a>
+
+
+        <a th:href="@{/reserver/list}">
+        <div class="card m-1 p-4 text-center">
+           Prix totale <p class="fw-bolder">[[${prixTotale}]]</p>
+        </div>
+        </a>
+
+        <a th:href="@{/}">
+        <div class="card m-1 p-4 text-center">
+            Nombre de moto <p class="fw-bolder">[[${quatreRoues}]]</p>
+            <p class="fw-bolder">[[${pM}]]% de reservation</p>
+        </div>
+        </a>
+        <a th:href="@{/}">
+        <div class="card m-1 p-4 text-center">
+            Nombre de véhicule <p class="fw-bolder">[[${vehiculeV}]]</p>
+            <p class="fw-bolder">[[${pV}]]% de reservation</p>
+        </div>
+        </a>
+    </div>
+
+    <hr />
+
+    <div class="d-flex">
+        <div class="card m-1 p-4 text-center">
+            Nombre de Caminion <p class="fw-bolder">[[${deuxRoues}]]</p>
+            <p class="fw-bolder">[[${pC}]]% de reservation</p>
+        </div>
+
+    </div>
+</main>
+
+<th:block th:insert="~{footer :: footer}"></th:block>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

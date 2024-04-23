@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="https://www.thymeleaf.org">
+<th:block th:insert="~{head :: head}"></th:block>
+
+<body>
+
+<th:block th:insert="~{header :: header}"></th:block>
+
+<main class="container-fluid">
+    <h2 class="text-center">Gestion Véhicule</h2>
+
+    <table class="table table-striped">
+        <tr class="table-dark">
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Matricule</th>
+
+        </tr>
+
+        <tr th:each="agence: ${agence}">
+            <td th:text="${agence.idAgence}"></td>
+
+            <td>
+                <a th:href="@{/agence/__${agence.idAgence}__}" th:text="${agence.nomAgence}">UP</a>
+            </td>
+            <td th:text="${agence.matriculeAgence}"></td>
+
+            <td th:text="${agence.vehicules}"></td>
+
+
+
+
+            <td>
+                <a th:href="@{/agence/update/__${agence.idAgence}__}">UP</a>
+                <a th:href="@{/agence/delete/__${agence.idAgence}__}">DEL</a>
+            </td>
+        </tr>
+
+    </table>
+
+
+
+</main>
+
+<th:block th:insert="~{footer :: footer}"></th:block>
+
+
+
+</body>
+
+</html>
+
+
+
+
+

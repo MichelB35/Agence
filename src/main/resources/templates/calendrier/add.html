@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="CodeHim">
+    <title> BS5 FullCalendar Example </title>
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="./src/main/resources/static/assets/css/calendrie.css">
+    <!-- Demo CSS (No need to include it into your project) -->
+    <link rel="stylesheet" href="./src/main/resources/static/assets/css/demo.css">
+
+</head>
+
+
+<body>
+
+<!--$%adsense%$-->
+<main class="cd__main">
+    <!-- Start DEMO HTML (Use the following code into your project)-->
+    <div id='calendar'>Evenement</div>
+
+    <!-- Add modal -->
+
+    <div class="modal fade edit-form" id="form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <h5 class="modal-title" id="modal-title">Location</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="myForm" th:object="${reserver}" method="post" th:action="@{/reserver/add}">
+
+
+                    <div>
+                        <input type="hidden" name="idUser" th:value="${session.userLogin.idUser}"/>
+
+                    </div>
+                    <div>
+                        <input type="hidden" name="idVehicule" th:value="${session.vehiculeId.idVehicule}"/>
+                    </div>
+                    <div>
+                        <input type="text" name="prix" th:field="*{prix}" id="prix" th:value="${prix}"/>
+                    </div>
+                    <div>
+                        <input type="text" th:field="*{idReservation}" class="form-control"
+                               placeholder="temps en heure">
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="alert alert-danger " role="alert" id="danger-alert" style="display: none;">
+                            End date should be greater than start date.
+                        </div>
+                        <div class="form-group">
+                            <label for="prixLoc">Nombre heure si il s'agit d'une journée</label>
+                            <input type="time" th:field="*{time}" class="form-control" id="prixLoc"
+                                   placeholder="temps en heure">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dateDebut">Date de début<span class="text-danger">*</span></label>
+                            <input type="datetime-local" name="localDateDebutReservation" th:field="*{dateDebut}"
+                                   class="form-control" id="dateDebut"
+                                   placeholder="date de début" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dateFin">Date de fin <span class="text-danger">*</span></label>
+                            <input type="datetime-local" name="localDateFinReservation" th:field="*{dateFin}"
+                                   class="form-control" id="dateFin"
+                                   placeholder="date de fin" required>
+                        </div>
+
+
+                        <span>Tous les articles on un prix de reservation journalier de base [[${reserver.prix}]]</span>
+
+                    </div>
+                    <div class="modal-footer border-top-0 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-success" onclick="calculPrix()" id="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal-title"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="delete-modal-title">Confirm Deletion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center" id="delete-modal-body">
+                    Are you sure you want to delete the event?
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-secondary rounded-sm" data-dismiss="modal" id="cancel-button">
+                        Cancel
+                    </button>
+                    <button type="button" class="btn btn-danger rounded-lg" id="delete-button">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END EDMO HTML (Happy Coding!)-->
+</main>
+<footer class="cd__credit">Author: Mick Nixon M. Manuit - Distributed By: <a title="Free web design code & scripts"
+                                                                             href="https://www.codehim.com?source=demo-page"
+                                                                             target="_blank">CodeHim</a></footer>
+<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.2.0/main.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.2.0/main.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.2.0/main.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/uuid@8.3.2/dist/umd/uuidv4.min.js'></script>
+<!-- Script JS -->
+<script th:src="@{../js/calendrier/calendrier.js}"></script>
+<script type="text/javascript">
+    let differenceEnJours;
+    let input1;
+    let input;
+    let dateEntered;
+    let dateEntered1;
+    let differenceEnMillisecondes ;
+
+    document
+      .getElementById("dateDebut")
+      .addEventListener("change", function () {
+        input = this.value;
+        dateEntered = new Date(input);
+        console.log(typeof dateEntered);
+      });
+
+    document
+      .getElementById("dateFin")
+      .addEventListener("change", function () {
+        input1 = this.value;
+        dateEntered1 = new Date(input1);
+        console.log(input1);
+      });
+
+    let calculPrix = () => {
+      // Convertir les dates en millisecondes
+
+      let timestamp1 = dateEntered.getDate();
+      let timestamp2 = dateEntered1.getDate();
+
+       console.log("differenceEnMillisecondes");
+      // Calculer la différence en millisecondes
+      differenceEnMillisecondes = Math.abs(timestamp1 - timestamp2);
+      console.log(differenceEnMillisecondes);
+      // Convertir la différence en jours
+      differenceEnJours = Math.ceil(
+        differenceEnMillisecondes / (1000 * 3600 * 24)
+      );
+
+      // Afficher le résultat
+      console.log("Différence en jours : " + differenceEnJours);
+
+      console.log(differenceEnJours);
+
+      let prix = (document.getElementById("prix").value =
+        differenceEnMillisecondes * 49);
+
+    };
+</script>
+<!--$%analytics%$-->
+</body>
+</html>

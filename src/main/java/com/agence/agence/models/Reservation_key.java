@@ -2,7 +2,7 @@ package com.agence.agence.models;
 
 import jakarta.persistence.Embeddable;
 import lombok.*;
-
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -10,9 +10,9 @@ import lombok.*;
 //@EqualsAndHashCode
 @Embeddable
 public class Reservation_key {
-    private int idUser;
+    private Integer idUser;
 
-    private int  idCalendrier;
+    private Integer  idCalendrier;
 
-    private int idVehicule;
+    private Integer idVehicule;
 }

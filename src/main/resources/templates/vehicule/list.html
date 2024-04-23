@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="https://www.thymeleaf.org">
+<th:block th:insert="~{head :: head}"></th:block>
+
+<body>
+
+
+
+<main class="container-fluid">
+    <h2 class="text-center">Gestion Véhicule</h2>
+
+    <table class="table table-striped">
+        <tr class="table-dark">
+            <th>ID</th>
+            <th>Marque</th>
+            <th>Matricule</th>
+            <th>Alimentation</th>
+            <th>Poids</th>
+            <th>Prix</th>
+            <th>Longueur</th>
+            <th>Couleur</th>
+
+        </tr>
+
+        <tr th:each="vehicule: ${vehicules}">
+            <td th:text="${vehicule.idVehicule}"></td>
+            <td th:text="${vehicule.marque}"></td>
+            <td th:text="${vehicule.alimentation}"></td>
+
+            <td>
+                <a th:href="@{/vehicule/vehicule/__${vehicule.idVehicule}__}" th:text="${vehicule.matricule}">UP</a>
+            </td>
+            <td th:text="${vehicule.poids}"></td>
+            <td th:text="${vehicule.prix}"></td>
+            <td th:text="${vehicule.longueur}"></td>
+            <td th:text="${vehicule.couleur}"></td>
+
+
+
+            <td>
+                <a th:href="@{/vehicule/update/__${vehicule.idVehicule}__}">UP</a>
+                <a th:href="@{/vehicule/delete/__${vehicule.idVehicule}__}">DEL</a>
+            </td>
+        </tr>
+
+
+    </table>
+
+
+
+</main>
+
+<th:block th:insert="~{footer :: footer}"></th:block>
+
+
+
+</body>
+
+</html>
+
+
+
+
+

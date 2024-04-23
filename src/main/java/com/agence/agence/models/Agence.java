@@ -23,8 +23,8 @@ public class Agence {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idAgence;
 
-    @Size(min = 10)
-    @Column(nullable = false, unique = true, length = 10)
+    @Size(min = 8)
+    @Column(nullable = false, unique = true, length = 15)
     private String matriculeAgence;
 
     @Size(min = 2,  max = 30)

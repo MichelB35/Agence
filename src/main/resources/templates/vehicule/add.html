@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="https://www.thymeleaf.org">
+<th:block th:insert="~{head :: head}"></th:block>
+<body>
+
+<div class="col-lg-12" data-aos="fade-up" data-aos-delay="300">
+
+    <form th:action="@{/vehicule}" method="post" role="form" class="php-email-form" th:object ="${vehicule}">
+        <div class="row">
+            <input type="hidden" th:field="*{idVehicule}"/>
+
+            <div class="col-lg-6 form-group">
+                <input type="text" name="type" class="form-control" th:field="*{couleur}" id="couleur" placeholder="Entrez la couleur du vehicule" required>
+            </div>
+S
+            <div class="col-lg-6 form-group">
+                <input type="text" name="longueur" class="form-control" th:field="*{longueur}" id="longueur" placeholder="Entrez la longueur" required>
+            </div>
+
+            <div class="col-lg-6 form-group">
+                <input type="text" name="matricule" class="form-control" th:field="*{matricule}" id="matricule" placeholder="Entrez le matricule" required>
+            </div>
+
+            <div class="col-lg-6 form-group">
+                <input type="text" name="marque" class="form-control" th:field="*{marque}" id="marque" placeholder="Entrez la marque" required>
+            </div>
+
+            <div class="col-lg-6 form-group">
+                <input type="text" name="prix" class="form-control" th:field="*{prix}" id="prix" placeholder="Entrez le prix" required>
+            </div>
+
+            <div class="col-lg-6 form-group">
+                <input type="text" name="alimentation" class="form-control" th:field="*{alimentation}" id="alimentation" placeholder="Entrez le type d'limentation" required>
+            </div>
+
+            <div class="col-lg-6 form-group">
+                <input type="text" name="poids" class="form-control" th:field="*{poids}" id="poids" placeholder="Entrez le poids de la voiture" required>
+            </div>
+
+            <div>
+                <select name="agence" id=""  class="form-select">
+                    <option th:id="${agence.idAgence}" th:value="${agence.idAgence}" th:each="agence:${agences}">[[${agence.nomAgence}]]</option>
+                </select>
+            </div>
+
+            <div>
+                <select name="categorie" th:field="*{type}" class="form-select">
+                    <option  value="caminion">caminion</option>
+                    <option  value="moto">moto</option>
+                    <option  value="voiture">voiture</option>
+                </select>
+            </div>
+
+            <div>
+                <select name="categorie"  class="form-select">
+                    <option th:id="${categorie.idCategorie}" th:value="${categorie.idCategorie}" th:each="categorie:${categories}">[[${categorie.type}]]</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="text-center"><button type="submit">Send Message</button></div>
+    </form>
+</div>
+
+</body>
+</html>

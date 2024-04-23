@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="https://www.thymeleaf.org">
+<th:block th:insert="~{head :: head}"></th:block>
+
+<body>
+
+
+
+<main class="container-fluid">
+    <h2 class="text-center">Gestion Véhicule</h2>
+
+    <table class="table table-striped">
+        <tr class="table-dark">
+            <th>ID</th>
+            <th>Matricule</th>
+            <th>Poids</th>
+            <th>Prix</th>
+            <th>Longueur</th>
+            <th>Couleur</th>
+
+        </tr>
+
+        <tr th:each="vehicule: ${vehicule}">
+            <td th:text="${vehicule.idVehicule}"></td>
+
+            <td>
+                <a th:href="@{/vehicule/vehicule/__${vehicule.idVehicule}__}" th:text="${vehicule.matricule}">UP</a>
+            </td>
+            <td th:text="${vehicule.poids}"></td>
+            <td th:text="${vehicule.prix}"></td>
+            <td th:text="${vehicule.longueur}"></td>
+            <td th:text="${vehicule.couleur}"></td>
+
+
+
+            <td>
+                <a th:href="@{/vehicule/reserver/__${vehicule.idVehicule}__}" class="btn btn-primary">Réservé</a>
+            </td>
+        </tr>
+
+    </table>
+
+
+
+</main>
+
+<th:block th:insert="~{footer :: footer}"></th:block>
+
+
+
+</body>
+
+</html>
+
+
+
+
+

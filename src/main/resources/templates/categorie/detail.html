@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="https://www.thymeleaf.org">
+<th:block th:insert="~{head :: head}"></th:block>
+
+<body>
+
+
+<main class="container-fluid">
+    <h2 class="text-center">Gestion catégorie</h2>
+
+    <form th:action="@{/categorie/search}"  role="form" class="php-email-form" >
+        <div class="row">
+
+
+            <div class="col-lg-6 form-group">
+                <input type="text" name="keyword" th:value="${keyword}" class="form-control" id="keyword" placeholder="entrer un mot à rechercher" >
+            </div>
+
+            <div class="col-lg-6 form-group">
+            </div>
+
+            <div class="col-lg-6 form-group">
+
+            </div>
+
+        </div>
+
+        <div class="text-center"><button type="submit">search</button></div>
+        <div class="text-center"><button name="clear" onclick="clearAll()" type="submit">clear</button></div>
+    </form>
+
+    <table class="table table-striped">
+        <tr class="table-dark">
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Nombre de porte</th>
+            <th>Nombre de roue</th>
+
+        </tr>
+
+        <tr th:each="categorie: ${categorie}">
+            <td th:text="${categorie.idCategorie}"></td>
+
+            <td>
+                <a th:href="@{/categorie/categorie/__${categorie.idCategorie}__}" th:text="${categorie.type}">UP</a>
+            </td>
+            <td th:text="${categorie.nombrePorte}"></td>
+            <td th:text="${categorie.nombreDeRoue}"></td>
+
+
+
+            <td>
+                <a th:href="@{/categorie/update/__${categorie.idCategorie}__}">UP</a>
+                <a th:href="@{/categorie/delete/__${categorie.idCategorie}__}">DEL</a>
+            </td>
+        </tr>
+
+    </table>
+
+
+
+</main>
+
+<th:block th:insert="~{footer :: footer}"></th:block>
+
+<script>
+    let clearAll=()=>{
+    window.location = "/"
+    }
+</script>
+
+</body>
+
+</html>
+
+
+
+
+

@@ -1,0 +1,22 @@
+
+<html lang="fr" xmlns:th="https://www.thymeleaf.org">
+<th:block th:insert="~{head :: head}"></th:block>
+
+<body>
+
+
+<div class="d-flex justify-content-center">
+<div class="card " style="width: 18rem;" th:each="vehicule:${vehicules}" >
+    <img class="card-img-top" src="https://r.search.yahoo.com/_ylt=AwrhcV7IFSBmQuwIK91lAQx.;_ylu=c2VjA3NyBHNsawNpbWcEb2lkAzg3MmExMjE5YTViM2VmNjRhNzA1NmY0MGVlNzU1NDA3BGdwb3MDODgEaXQDYmluZw--/RV=2/RE=1713407560/RO=11/RU=http%3a%2f%2fblog.consumerguide.com%2fmore-mpg-for-rav4-2016-toyota-rav4%2f/RK=2/RS=Vr9HbJKKqL24aEL9tneCR6qCzXE-" alt="Card image cap">
+    <div class="card-body" >
+        <h5 class="card-title" th:id="${vehicule.idVehicule}"  th:value="${vehicule.idVehicule}"  >[[${vehicule.categorie.type}]]</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a th:href="@{/vehicule/detail/__${vehicule.idVehicule}__}" class="btn btn-primary">Détail</a>
+
+        <a th:href="@{/vehicule/reserver/__${vehicule.idVehicule}__}" class="btn btn-primary">Réservé</a>
+    </div>
+</div>
+</div>
+</body>
+<th:block th:insert="~{footer :: footer}"></th:block>
+</html>
